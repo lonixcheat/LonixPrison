@@ -1,0 +1,76 @@
+if game.PlaceId == 155615604 then
+    -- UI Library
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+    local Window = Library.CreateLib("Lonix Cheat", "BloodTheme")
+
+    -- Notification Function
+    local function Notify(msg)
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Lonix Cheat";
+            Text = msg;
+            Duration = 3;
+        })
+    end
+
+    -- İlk açılış bildirimi
+    Notify("Lonix Cheat Aktif!")
+
+    -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    -- TELEPORTS
+    local TeleportSection = Main:NewSection("Teleports")
+
+    TeleportSection:NewButton("Teleport Police Base", "Go to Police Base", function()
+        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            hrp.CFrame = CFrame.new(848.039978, 99.9899826, 2304.01953)
+            Notify("Başarıyla ışınlandın: Police Base")
+        end
+    end)
+
+    TeleportSection:NewButton("Teleport Criminal Base", "Go to Criminal Base", function()
+        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            hrp.CFrame = CFrame.new(-920.510803, 95.327179, 2144.6709)
+            Notify("Başarıyla ışınlandın: Criminal Base")
+        end
+    end)
+
+    TeleportSection:NewButton("Teleport Prison", "Go to Prison", function()
+        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            hrp.CFrame = CFrame.new(914.501221, 99.9899826, 2443.53076)
+            Notify("Başarıyla ışınlandın: Prison")
+        end
+    end)
+
+    -- PLAYER
+    local Player = Window:NewTab("Player")
+    local PlayerSection = Player:NewSection("Player")
+
+    PlayerSection:NewSlider("Walkspeed", "Changes the walkspeed", 250, 16, function(v)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+    end)
+
+    PlayerSection:NewSlider("Jumppower", "Changes the jumppower", 250, 50, function(v)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+    end)
+
+    -- GUI Aç/Kapa (X Tuşu)
+    local UIS = game:GetService("UserInputService")
+    local toggle = true
+    UIS.InputBegan:Connect(function(input, gpe)
+        if gpe then return end
+        if input.KeyCode == Enum.KeyCode.X then
+            toggle = not toggle
+            game.CoreGui["Lonix Cheat"].Enabled = toggle
+            if toggle then
+                Notify("Lonix Cheat Açıldı")
+            else
+                Notify("Lonix Cheat Kapandı")
+            end
+        end
+    end)
+end
